@@ -1,454 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Happy Birthday Palak 🎀</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    body {
-      background: #fdf3f8;
-      overflow-x: hidden;
-    }
-
-    /* Loading Screen */
-    #loader {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fbe7f2;
-      z-index: 9999;
-      flex-direction: column;
-      animation: fadeOut 1s ease forwards;
-      animation-delay: 3.5s;
-    }
-
-    .loader-heart {
-      width: 40px;
-      height: 40px;
-      background: #ff5ca7;
-      position: relative;
-      transform: rotate(45deg);
-      animation: heartbeat 1s infinite;
-    }
-
-    .loader-heart:before,
-    .loader-heart:after {
-      content: "";
-      width: 40px;
-      height: 40px;
-      background: #ff5ca7;
-      border-radius: 50%;
-      position: absolute;
-    }
-
-    .loader-heart:before {
-      top: -20px;
-      left: 0;
-    }
-
-    .loader-heart:after {
-      left: -20px;
-      top: 0;
-    }
-
-    @keyframes heartbeat {
-      0% {
-        transform: rotate(45deg) scale(1);
-      }
-      50% {
-        transform: rotate(45deg) scale(1.3);
-      }
-      100% {
-        transform: rotate(45deg) scale(1);
-      }
-    }
-
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
-
-    /* Floating Hearts */
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      color: #ff8fbc;
-      font-size: 20px;
-      animation: floatUp 5s linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) translateX(0); opacity: 1; }
-      100% { transform: translateY(-120vh) translateX(20px); opacity: 0; }
-    }
-
-    /* Main Title */
-    header {
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    header h1 {
-      font-size: 2.8rem;
-      color: #ff4d94;
-    }
-
-    /* Reasons Section */
-    .reasons {
-      margin: 40px auto;
-      padding: 20px;
-      width: 90%;
-      max-width: 700px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    }
-
-    .reason-item {
-      padding: 15px;
-      font-size: 1.1rem;
-      color: #444;
-    }
-
-    /* Gallery */
-    .gallery {
-      width: 90%;
-      margin: 40px auto;
-      columns: 3;
-      column-gap: 15px;
-    }
-
-    .gallery img {
-      width: 100%;
-      margin-bottom: 15px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    /* Final Surprise */
-    #surpriseBtn {
-      display: block;
-      margin: 40px auto;
-      padding: 15px 30px;
-      background: #ff4d94;
-      border: none;
-      color: white;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: 0.3s;
-    }
-
-    #surpriseBtn:hover {
-      transform: scale(1.05);
-      background: #ff2d7a;
-    }
-
-    #popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #popup .box {
-      background: #fff;
-      padding: 30px;
-      border-radius: 20px;
-      font-size: 1.6rem;
-      color: #ff2d7a;
-      text-align: center;
-      width: 80%;
-      max-width: 500px;
-      animation: popIn 0.6s ease;
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.4); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-  </style>
-  <!-- Added soft animated gradient background and extra aesthetic styles -->
-  <style>
-    body {
-      background: linear-gradient(-45deg, #ffe4f0, #fad9ff, #ffeaf6, #f3d6ff);
-      background-size: 400% 400%;
-      animation: gradientFlow 15s ease infinite;
-    }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Soft pink glow on hover for aesthetic elements */
-    img:hover, button:hover, h1:hover, h2:hover {
-      filter: drop-shadow(0 0 12px rgba(255, 140, 200, 0.5));
-      transition: 0.4s ease;
-    }
-
-    /* Polaroid style images */
-    .slide img {
-      border-radius: 18px;
-      background: #fff;
-      padding: 12px;
-      border: 2px solid #ffdde9;
-      transform: rotate(-1.5deg);
-    }
-    .slide:nth-child(even) img {
-      transform: rotate(1.5deg);
-    }
-
-    /* Polaroid captions */
-    .polaroid-caption {
-      margin-top: 8px;
-      font-size: 0.9rem;
-      color: #ff4d94;
-      text-align: center;
-      opacity: 0.9;
-    }
-
-    /* Cute divider */
-    .divider {
-      text-align: center;
-      font-size: 1.4rem;
-      color: #ff9ac6;
-      margin: 30px 0;
-    }
-
-    /* Floating petals */
-    .petal {
-      position: fixed;
-      top: -10px;
-      width: 18px;
-      height: 18px;
-      opacity: 0.8;
-      pointer-events: none;
-      animation: petalFall linear infinite;
-    }
-
-    @keyframes petalFall {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(110vh) rotate(180deg); }
-    }
-
-    /* Frosted glass button */
-    .glass-btn {
-      backdrop-filter: blur(8px);
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      color: #ff2d7a;
-      padding: 16px 28px;
-      border-radius: 18px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(255, 120, 180, 0.25);
-      transition: .3s;
-    }
-
-    .glass-btn:hover {
-      background: rgba(255, 255, 255, 0.5);
-      transform: scale(1.05);
-    }
-
-    /* Letter surprise */
-    #letterBox {
-      width: 80%;
-      max-width: 550px;
-      margin: 20px auto;
-      display: none;
-      background: #fff3fb;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-      font-size: 1.1rem;
-      color: #ff4d94;
-      line-height: 1.7;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Floating petals generation -->
-  <script>
-    function spawnPetal() {
-      const petal = document.createElement("img");
-      petal.src = "https://i.imgur.com/3fJ1vZP.png"; /* tiny pink petal icon */
-      petal.className = "petal";
-      petal.style.left = Math.random() * 100 + "vw";
-      petal.style.animationDuration = 4 + Math.random() * 4 + "s";
-      document.body.appendChild(petal);
-      setTimeout(() => petal.remove(), 7000);
-    }
-    setInterval(spawnPetal, 900);
-  </script>
-
-
-  <div id="loader">
-    <div class="loader-heart"></div>
-    <p style="margin-top:20px; color:#ff4d94; font-size:1.2rem;">Loading something special...</p>
+  <!-- Loader -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-heart" aria-hidden="true"></div>
+    <p class="loader-text">Loading something special...</p>
   </div>
 
   <header>
     <h1>Happy Birthday Palak 🎀</h1>
   </header>
 
-  <section class="reasons">
-    <h2 style="text-align:center; color:#ff4d94;">Reasons why you are special 💗</h2>
+  <main>
+    <!-- Reasons -->
+    <section id="reasons-section" class="card">
+      <h2 class="section-title">Reasons why you are special 💗</h2>
+      <div class="reason">• You are the reason my world shines brighter… ik ik just a lil bit brighter, but still brighter 😌💗</div>
+      <div class="reason">• Your smile feels like sunlight on a cold morning.</div>
+      <div class="reason">• You make everything feel softer, calmer, and more beautiful.</div>
+      <div class="reason">• You don’t even try, yet you make people feel loved.</div>
+      <div class="reason">• And yeah… you're just you — and that’s enough. 💗</div>
+    </section>
 
-    <div class="reason-item">• You are the reason my world shines brighter… ik ik just a lil bit brighter, but still brighter 😌💗</div>
-    <div class="reason-item">• Your smile feels like sunlight on a cold morning.</div>
-    <div class="reason-item">• You make everything feel softer, calmer, and more beautiful.</div>
-    <div class="reason-item">• You don’t even try, yet you make people feel loved.</div>
-    <div class="reason-item">• And yeah… you're just you — and that’s enough. 💗</div>
-  </section>
+    <!-- Fade Slider (we build slides in script.js) -->
+    <section id="gallery-section" class="card gallery-section" aria-label="Photo gallery">
+      <h2 class="section-title">Memories</h2>
 
-  <section class="gallery slider">
-    <!-- Sliding gallery: images hosted on your GitHub repo (raw links) -->
-    <div class="slider-track" id="sliderTrack"></div>
-    <div class="slider-controls">
-      <button id="prev" aria-label="Previous">◀</button>
-      <button id="next" aria-label="Next">▶</button>
-    </div>
-    <div class="dots" id="dots"></div>
-  </section>
+      <div class="fade-slider" aria-roledescription="carousel">
+        <div class="slides" id="fadeSlides" role="list"></div>
 
-  <style>
-    /* Slider styles */
-    .slider { max-width: 900px; margin: 30px auto; position: relative; }
-    .slider-track { display: flex; gap: 18px; overflow: hidden; scroll-behavior: smooth; }
-    .slide { min-width: 100%; flex-shrink: 0; display:flex; align-items:center; justify-content:center; }
-    .slide img { width: 100%; height: auto; border-radius: 18px; box-shadow: 0 6px 24px rgba(0,0,0,0.12); }
-    .slider-controls { position: absolute; top: 50%; left: 0; right: 0; display:flex; justify-content:space-between; transform: translateY(-50%); padding: 0 12px; pointer-events: none; }
-    .slider-controls button { pointer-events: all; background: rgba(255,255,255,0.85); border: none; font-size: 20px; padding: 10px 14px; border-radius: 10px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
-    .dots { text-align:center; margin-top:12px; }
-    .dot { display:inline-block; width:10px; height:10px; border-radius:50%; background:#ffd5e6; margin:0 6px; cursor:pointer; opacity:0.6; }
-    .dot.active { background:#ff4d94; opacity:1; }
-  </style>
+        <button class="fs-btn prev" id="fsPrev" aria-label="Previous slide">◀</button>
+        <button class="fs-btn next" id="fsNext" aria-label="Next slide">▶</button>
 
-  <script>
-    // image list (raw GitHub URLs)
-    const images = [
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-45.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-48.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-50.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-51.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-52.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-53.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-54.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-55.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-56.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-57.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-58.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-33-59.jpg",
-      "https://raw.githubusercontent.com/thisisaryan99/Happiest-Birthdayyyy/main/photo_2025-11-22_01-34-00.jpg"
-    ];
+        <div class="fs-dots" id="fsDots" role="tablist" aria-label="Slide dots"></div>
+      </div>
+      <p class="hint">Click a photo to open fullscreen</p>
+    </section>
 
-    const track = document.getElementById('sliderTrack');
-    const dotsWrap = document.getElementById('dots');
-    let current = 0;
+    <!-- Final surprise -->
+    <section id="final-section" class="card">
+      <button id="surpriseBtn" class="glass-btn">Tap for a Surprise 🎁</button>
+      <div id="letterBox" role="region" aria-label="Letter" hidden>
+        <p>Happiest Birthday my RB21 Suzuka Livery 💗✨</p>
+        <p>You're truly one of a kind.</p>
+      </div>
+    </section>
+  </main>
 
-    // build slides
-    images.forEach((src, i) => {
-      const slide = document.createElement('div');
-      slide.className = 'slide';
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = `Palak ${i+1}`;
-      slide.appendChild(img);
-      track.appendChild(slide);
+  <!-- Fullscreen viewer (hidden until used) -->
+  <div id="viewer" class="viewer" aria-hidden="true">
+    <button class="viewer-close" id="viewerClose" aria-label="Close viewer">✕</button>
+    <button class="viewer-nav left" id="viewerPrev" aria-label="Previous image">◀</button>
+    <img id="viewerImg" alt="Full view">
+    <button class="viewer-nav right" id="viewerNext" aria-label="Next image">▶</button>
+  </div>
 
-      const dot = document.createElement('span');
-      dot.className = 'dot' + (i===0? ' active':'');
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    });
-
-    function updateDots() {
-      Array.from(dotsWrap.children).forEach((d, idx) => d.className = 'dot' + (idx===current? ' active':'') );
-    }
-
-    function goTo(index) {
-      current = (index + images.length) % images.length;
-      track.scrollLeft = current * track.clientWidth;
-      updateDots();
-    }
-
-    document.getElementById('prev').addEventListener('click', () => goTo(current-1));
-    document.getElementById('next').addEventListener('click', () => goTo(current+1));
-
-    // autoplay
-    let autoplay = setInterval(() => goTo(current+1), 3500);
-    track.addEventListener('mouseenter', () => clearInterval(autoplay));
-    track.addEventListener('mouseleave', () => autoplay = setInterval(() => goTo(current+1), 3500));
-
-    // ensure responsive slide width on resize
-    window.addEventListener('resize', () => { track.scrollLeft = current * track.clientWidth; });
-  </script>
-
-  <button id="surpriseBtn">Tap for a Surprise 🎁</button>
-
-  <div id="popup">
-    <div class="box">
-      Happiest Birthday my RB21 Suzuka Livery 💗✨<br>You're truly one of a kind.
+  <div id="popup" class="popup" role="dialog" aria-hidden="true">
+    <div class="popup-box">
+      <p>Happiest Birthday my RB21 Suzuka Livery 💗✨</p>
     </div>
   </div>
 
-  <script>
-    function spawnHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💗";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.opacity = 0.5;
-      heart.style.fontSize = 16 + Math.random()*8 + "px";
-      heart.style.animationDuration = 6 + Math.random() * 4 + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 9000);
-    }
-    setInterval(spawnHeart, 1200);
-
-    // smoother loader removal
-    window.addEventListener('load', () => {
-      const loader = document.getElementById('loader');
-      loader.style.transition = "opacity 1.2s ease";
-      loader.style.opacity = 0;
-      setTimeout(()=> loader.style.display = "none", 1500);
-    });
-
-    document.getElementById("surpriseBtn").onclick = () => {
-      document.getElementById("popup").style.display = "flex";
-      for (let i = 0; i < 50; i++) {
-        const conf = document.createElement("div");
-        conf.innerHTML = "🌹";
-        conf.style.position = "fixed";
-        conf.style.top = "-10px";
-        conf.style.left = Math.random() * 100 + "vw";
-        conf.style.fontSize = "20px";
-        conf.style.animation = `drop ${2 + Math.random()}s linear`;
-        document.body.appendChild(conf);
-        setTimeout(() => conf.remove(), 3000);
-      }
-    };
-
-    const style = document.createElement('style');
-    style.innerHTML = `@keyframes drop { 0%{transform:translateY(0);} 100%{transform:translateY(120vh);} }`;
-    document.head.appendChild(style);
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
