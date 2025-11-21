@@ -1,63 +1,73 @@
-window.addEventListener('load', () => {
-  textAnim();
-  smallHeartAnim();
-});
-
-// Insert smallHearts element
-const total = 13;
-const container = document.querySelector('.smallHearts');
-for (var i = 0, span; i < total; i++) {
-  span = document.createElement('span');
-  span.className = 'smallHeart';
-  container.appendChild(span);
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
 }
 
-// Text animation
-function textAnim() {
-  const tl = gsap.timeline();
-  tl.set('.s', {
-    opacity: 1 }).
-
-  from('.s', {
-    duration: 0.4,
-    delay: '3',
-    ease: 'power1.inOut',
-    scale: 0,
-    y: 40,
-    stagger: 0.04 });
-
+.container {
+    text-align: center;
+    margin-top: 12vh;
+    padding: 20px;
 }
 
-// Small hearts animation
-function smallHeartAnim() {
-  const tl = gsap.timeline();
-  tl.set('.smallHeart', {
-    opacity: 1 }).
+.title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 70px;
+    color: #fff;
+    text-shadow: 0 0 20px #ffb6c1;
+    animation: fadeDown 1.3s ease;
+}
 
-  fromTo(
-  '.smallHeart',
-  {
-    scale: 0,
-    rotate: '-=25',
-    y: '+=70' },
+.name {
+    font-size: 40px;
+    margin-top: -15px;
+    color: #fff;
+    animation: fadeUp 1.3s ease;
+}
 
-  {
-    duration: 3.4,
-    delay: '3.6',
-    ease: 'slow.out',
-    rotate: 'random(-20, 20)',
-    scale: 'random(0.5, 1.5)',
-    y: '0',
-    x: Math.PI * 4,
-    modifiers: {
-      x: function (x) {
-        return Math.sin(parseFloat(x)) * 15 + 'px';
-      } },
+.msg {
+    color: white;
+    font-size: 20px;
+    width: 80%;
+    margin: 20px auto;
+    animation: fade 2s ease;
+}
 
-    stagger: {
-      each: 0.08,
-      from: 'random' } });
+button {
+    background: white;
+    color: #ff6fa8;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-size: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.6);
+    transition: 0.3s;
+}
 
+button:hover {
+    transform: scale(1.08);
+}
 
+/* heart floating animation */
+@keyframes floatHearts {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-200px); opacity: 0; }
+}
 
+/* fade animations */
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-30px);} to { opacity: 1; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
