@@ -171,41 +171,37 @@ header h1 {
 }
 
 /* ——————————————————————————————————————— */
-/* SLIDER / GALLERY STYLES */
-/* ——————————————————————————————————————— */
+/* ————— FIXED CLEAN SLIDER ————— */
+
 .slider {
   max-width: 900px;
-  margin: 30px auto;
+  margin: 40px auto;
   position: relative;
+  overflow: hidden;
 }
 
 .slider-track {
   display: flex;
-  gap: 18px;
-  overflow: hidden;
-  scroll-behavior: smooth;
+  transition: transform 0.45s ease;
 }
 
 .slide {
   min-width: 100%;
   flex-shrink: 0;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .slide img {
-  border-radius: 18px;
-  background: #fff;
-  padding: 12px;
-  border: 2px solid #ffdde9;
-  transition: filter 0.4s;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  object-fit: cover;
 }
 
-.slide img:hover {
-  filter: drop-shadow(0 0 12px rgba(255, 140, 200, 0.5));
-}
-
+/* Controls */
 .slider-controls {
   position: absolute;
   top: 50%;
@@ -213,47 +209,45 @@ header h1 {
   right: 0;
   display: flex;
   justify-content: space-between;
+  transform: translateY(-50%);
   padding: 0 12px;
   pointer-events: none;
 }
 
 .slider-controls button {
   pointer-events: all;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255,255,255,0.9);
   border: none;
   font-size: 20px;
   padding: 10px 14px;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: filter 0.3s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10);
 }
 
-.slider-controls button:hover {
-  filter: drop-shadow(0 0 12px rgba(255, 140, 200, 0.5));
-}
-
+/* Dots */
 .dots {
   text-align: center;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .dot {
-  display: inline-block;
   width: 10px;
   height: 10px;
+  display: inline-block;
   border-radius: 50%;
   background: #ffd5e6;
   margin: 0 6px;
   cursor: pointer;
   opacity: 0.6;
-  transition: background 0.3s, opacity 0.3s;
+  transition: opacity .3s, background .3s;
 }
 
 .dot.active {
-  background: #ff4d94;
   opacity: 1;
+  background: #ff4d94;
 }
+
 
 /* ——————————————————————————————————————— */
 /* FINAL SURPRISE BUTTON + POPUP */
