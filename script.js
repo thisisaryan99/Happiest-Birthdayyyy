@@ -1,46 +1,130 @@
-// CONFETTI
-const canvas = document.getElementById("confettiCanvas");
-const ctx = canvas.getContext("2d");
+// ------------------------------
+// Floating Petals Effect
+// ------------------------------
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function createPetal() {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
 
-let confetti = [];
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+    petal.style.opacity = 0.7 + Math.random() * 0.3;
+    petal.style.transform = `scale(${0.8 + Math.random() * 0.7})`;
 
-function createConfetti() {
-    return {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height - canvas.height,
-        r: Math.random() * 6 + 2,
-        d: Math.random() * 0.9 + 0.3,
-        color: `hsl(${Math.random() * 360}, 80%, 70%)`
-    };
+    document.body.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, 10000);
 }
 
-for (let i = 0; i < 150; i++) confetti.push(createConfetti());
+setInterval(createPetal, 400);
 
-function drawConfetti() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+// ------------------------------
+// Smooth Scroll for Buttons
+// ------------------------------
 
-    confetti.forEach((p) => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
+function goToGallery() {
+    document.getElementById("gallery-section").scrollIntoView({ behavior: "smooth" });
+}
 
-        p.y += p.d;
-        if (p.y > canvas.height) {
-            p.x = Math.random() * canvas.width;
-            p.y = -10;
-        }
+function goToReasons() {
+    document.getElementById("reasons-section").scrollIntoView({ behavior: "smooth" });
+}
+
+function goToFinal() {
+    document.getElementById("final-section").scrollIntoView({ behavior: "smooth" });
+}
+
+
+// ------------------------------
+// Slideshow Logic
+// ------------------------------
+
+let slideIndex = 0;
+let slides = document.querySelectorAll(".slide");
+
+function showSlide(n) {
+    slides.forEach((slide, i) => {
+        slide.style.display = i === n ? "block" : "none";
     });
-
-    requestAnimationFrame(drawConfetti);
 }
 
-drawConfetti();
+function nextSlide() {
+    slideIndex = (slideIndex + 1) % slides.length;
+    showSlide(slideIndex);
+}
 
-// SURPRISE BUTTON
-document.getElementById("surpriseBtn").onclick = () => {
-    alert("Palak, you're truly special 💖\nHappiest Birthday once again! 🎀🎉");
-};
+function prevSlide() {
+    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+    showSlide(slideIndex);
+}
+
+showSlide(slideIndex);
+setInterval(nextSlide, 4500); // Auto Slide
+
+
+// ------------------------------
+// Reveal "Reasons You’re Special"
+// ------------------------------
+
+function revealReasons() {
+    const items = document.querySelectorAll(".reason");
+    let delay = 0;
+
+    items.forEach(item => {
+        setTimeout(() => {
+            item.classList.add("show");
+        }, delay);
+        delay += 400;
+    });
+}
+
+
+// ------------------------------
+// Final RB21 Suzuka Livery Popup
+// ------------------------------
+
+function showFinalPopup() {
+    const popup = document.getElementById("finalPopup");
+    popup.classList.add("show-popup");
+
+    launchConfetti();
+}
+
+
+// ------------------------------
+// Confetti Animation
+// ------------------------------
+
+function launchConfetti() {
+    const duration = 2000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+        confetti({
+            particleCount: 5,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    })();
+}
+
+
+// ------------------------------
+// Button Click Listeners
+// ------------------------------
+
+document.getElementById("galleryBtn").addEventListener("click", goToGallery);
+document.getElementById("reasonsBtn").addEventListener("click", () => {
+    goToReasons();
+    setTimeout(revealReasons, 800);
+});
+document.getElementById("finalBtn").addEventListener("click", () => {
+    goToFinal();
+    setTimeout(showFinalPopup, 1200);
+});
